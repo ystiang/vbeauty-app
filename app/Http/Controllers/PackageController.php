@@ -57,7 +57,21 @@ class PackageController extends Controller
     } catch (Exception $e) {
         dd($e);
     }
-
     }
+
+    public function destroy(Request $request, $id)
+    {
+        $package=Package::findOrFail($id);
+
+        if(is_null($package)){
+            return abort(404);
+         }
+
+        $package->delete();
+        // sleep(1);
+
+        return redirect()->route('calculation.index')->with('message', 'Record Deleted');
+    }
+    
     
 }

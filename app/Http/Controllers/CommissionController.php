@@ -74,4 +74,17 @@ class CommissionController extends Controller
             dd($e);
         }
     } 
+    public function destroy(Request $request, $id)
+    {
+        $commission=Commission::findOrFail($id);
+
+        if(is_null($commission)){
+            return abort(404);
+         }
+
+        $commission->delete();
+        // sleep(1);
+
+        return redirect()->route('commissions.index')->with('message', 'Record Deleted');
+    }
 }
