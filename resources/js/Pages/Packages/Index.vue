@@ -1,41 +1,43 @@
 <script setup>
 import { Head } from "@inertiajs/inertia-vue3";
-import { mdiAccountKey, mdiAccountMultiple, mdiPlus, mdiTableEdit, mdiTrashCan } from "@mdi/js";
+import { reactive, ref } from "vue";
+import { mdiCalculator, mdiTableEdit, mdiTrashCan, mdiPlus } from "@mdi/js";
 import LayoutAuthenticated from "@/layouts/LayoutAuthenticated.vue";
 import SectionMain from "@/components/SectionMain.vue";
 import SectionTitleLineWithButton from "@/components/SectionTitleLineWithButton.vue";
 import CardBoxWidget from "@/components/CardBoxWidget.vue";
 import CardBox from "@/components/CardBox.vue";
-import BaseLevel from "@/components/BaseLevel.vue";
+import { useForm } from "@inertiajs/inertia-vue3";
 import BaseButtons from "@/components/BaseButtons.vue";
 import BaseButton from "@/components/BaseButton.vue";
-import { Link } from "@inertiajs/inertia-vue3";
-import { Inertia } from "@inertiajs/inertia";
-import { useForm } from "@inertiajs/inertia-vue3";
 
 const props = defineProps({
-  users: {
+  packages: {
     type: Object,
     default: () => ({}),
   },
 });
 
-const form = useForm();
+const form = useForm({
+  package_name: "",
+  treatment: "",
+  package_type: "",
+  commission: "",
+});
 
-function destroy(id) {
-  if (confirm("Are you sure you want to DELETE?")) {
-    form.delete(route('accounts.destroy', id));
-  }
-}
+const submit = () => {
+  form.post(route("calculation.store"));
+};
+
 </script>
+
 
 <template>
   <LayoutAuthenticated>
-    <Head title="Accounts" />
     <SectionMain>
       <SectionTitleLineWithButton
-        :icon="mdiAccountMultiple"
-        title="Accounts"
+        :icon="mdiCalculator"
+        title="Calculation"
         main
       ></SectionTitleLineWithButton>
       <BaseButton
@@ -43,50 +45,39 @@ function destroy(id) {
         :icon="mdiPlus"
         label="Add"
         color="info"
-        :href="route('accounts.create')"
+        :href="route('calculation.create')"
         class="mb-4"
       />
-      
+
       <CardBox has-table>
-        
         <table>
           <thead>
             <tr>
-              <th scope="col">#</th>
-
-              <th>Name</th>
-              <th>Role</th>
-              <th>Email</th>
-              <th>Password</th>
+              <th>Package</th>
+              <th>Treatment</th>
+              <th>Type</th>
+              <th>Commission</th>
               <th>Action</th>
             </tr>
           </thead>
           <tbody>
-            <tr v-for="user in users" :key="user.id">
-              <td data-label="Name">
-                {{ user.id }}
+            <tr v-for="packagez in packages" :key="packagez.id">
+              <td data-label="Package">
+                {{ packagez.package_name }}
               </td>
 
-              <td data-label="Name">
-                {{ user.name }}
+              <td data-label="Treatment">
+                {{ packagez.treatment }}
               </td>
-              <td data-label="Role">
-                {{ user.role }}
-              </td>
-              <td data-label="Email">
-                {{ user.email }}
-              </td>
-              <td data-label="Password" class="lg:w-32">
-                <!-- <progress
-            class="flex w-2/5 self-center lg:w-full"
-            max="100"
-            :value="client.progress"
-          >
-            {{ client.progress }}
-          </progress> -->
+              <td data-label="Type">
+                {{ packagez.package_type }}
               </td>
 
-              <td class="before:hidden lg:w-1 whitespace-nowrap">
+              <td data-label="Commission">
+                {{ packagez.commission }}
+              </td>
+
+              <!-- <td class="before:hidden lg:w-1 whitespace-nowrap">
                 <BaseButtons type="justify-start lg:justify-end" no-wrap>
                   <BaseButton
                     color="info"
@@ -98,10 +89,10 @@ function destroy(id) {
                     color="danger"
                     :icon="mdiTrashCan"
                     small
-                    @click="destroy(user.id)"
+                    @click="isModalDangerActive = true"
                   />
                 </BaseButtons>
-              </td>
+              </td> -->
             </tr>
           </tbody>
         </table>

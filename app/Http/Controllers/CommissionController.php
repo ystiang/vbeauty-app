@@ -21,8 +21,19 @@ class CommissionController extends Controller
         
         $commissions = Commission::all();
         return Inertia::render(
-            'Commission',
+            'Commissions/Index',
             ['commissions' => $commissions]
+        );
+    }
+    /**
+     * Show the form for creating a new resource.
+     * 
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        return Inertia::render(
+            'Commissions/Create'
         );
     }
 

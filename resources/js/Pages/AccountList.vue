@@ -33,19 +33,12 @@ function destroy(id) {
   <LayoutAuthenticated>
     <Head title="Accounts" />
     <SectionMain>
-      <SectionTitleLineWithButton
+      <!-- <SectionTitleLineWithButton
         :icon="mdiAccountMultiple"
         title="Accounts"
         main
-      ></SectionTitleLineWithButton>
-      <BaseButton
-        
-        :icon="mdiPlus"
-        label="Add"
-        color="info"
-        rounded-full
-        small
-      />
+      ></SectionTitleLineWithButton> -->
+     
 
       <CardBox has-table>
         <table>

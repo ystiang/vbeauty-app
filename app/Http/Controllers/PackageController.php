@@ -19,10 +19,21 @@ class PackageController extends Controller
         
         $packages = Package::all();
         return Inertia::render(
-            'Calculation',
+            'Packages/Index',
         [
             'packages' => $packages
         ]
+        );
+    }
+    /**
+     * Show the form for creating a new resource.
+     * 
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        return Inertia::render(
+            'Packages/Create'
         );
     }
     /**

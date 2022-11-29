@@ -7,17 +7,17 @@ import {
 export default [
   
   {
-    href: "accounts",
+    href: route('accounts.index'),
     label: "Accounts",
     icon: mdiAccountCircle,
   },
   {
-    href: "commissions",
+    href: route('commissions.index'),
     label: "Commissions",
     icon: mdiFileDocument,
   },
   {
-    href: "calculation",
+    href: route('calculation.index'),
     label: "Calculation",
     icon: mdiCog,
   },
