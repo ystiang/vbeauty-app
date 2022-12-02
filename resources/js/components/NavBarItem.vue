@@ -3,7 +3,7 @@ import { mdiChevronUp, mdiChevronDown } from "@mdi/js";
 import { Link } from '@inertiajs/inertia-vue3';
 import { computed, ref, onMounted, onBeforeUnmount } from "vue";
 import { useStyleStore } from "@/stores/style.js";
-// import { useMainStore } from "@/stores/main.js";
+import { useMainStore } from "@/stores/main.js";
 import BaseIcon from "@/components/BaseIcon.vue";
 import UserAvatarCurrentUser from "@/components/UserAvatarCurrentUser.vue";
 import NavBarMenuList from "@/components/NavBarMenuList.vue";
@@ -53,7 +53,7 @@ const componentClass = computed(() => {
   return base;
 });
 
-// const itemLabel = computed(() => props.item.isCurrentUser ? usePage().props.value.auth.user.name : props.item.label);
+const itemLabel = computed(() => props.item.isCurrentUser ? usePage().props.value.auth.user.name : props.item.label);
 
 
 const isDropdownActive = ref(false);

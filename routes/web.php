@@ -35,6 +35,10 @@ Route::resource('commissions', CommissionController::class);
 Route::resource('calculation', PackageController::class);
 
 
+Route::middleware('auth', 'role:admin')->group(function () {
+    Route::resource('accounts', UserController::class);
+    Route::resource('calculation', PackageController::class);
+});
 
 
 Route::middleware('auth')->group(function () {

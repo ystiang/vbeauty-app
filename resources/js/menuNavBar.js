@@ -16,6 +16,12 @@ export default [
  
   {
     isCurrentUser: true,
+    menu: [
+      {
+        icon: mdiAccount,
+        label: "Profile",
+      }
+    ]
     
   },
   {
